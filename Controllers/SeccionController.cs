@@ -4,6 +4,7 @@ using GEN_InventarioRestApi.Data.Repository;
 using GEN_InventarioRestApi.DTO;
 using GEN_InventarioRestApi.Interfaces;
 using GEN_InventarioRestApi.Modelos;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -46,11 +47,32 @@ namespace GEN_InventarioRestApi.Controllers
 
         //POST api/seccion/add
         [HttpDelete("delete/{id}")]
-        public async Task<IActionResult> AddSeccion(int id)
+        public async Task<IActionResult> DeleteSeccion(int id)
         {
             uow.SeccionRepository.DeleteSeccion(id);
             await uow.SaveAsync();
             return Ok(id);
+        }
+
+        //PUT api/seccion/add
+        [HttpPut("update/{id}")]
+        public async Task<IActionResult> UpdateSeccion(int id, SeccionDto seccionDto)
+        {
+            var seccionFromDb = await uow.SeccionRepository.FindSeccion(id);
+            mapper.Map(seccionDto, seccionFromDb);
+            await uow.SaveAsync();
+            return StatusCode(200);
+        }
+
+        [HttpPatch("update/{id}")]
+        public async Task<IActionResult> UpdateSeccionPatch(int id, JsonPatchDocument<Seccion> seccionToPatch)
+        {
+            var seccionFromDb = await uow.SeccionRepository.FindSeccion(id);
+            seccionToPatch.ApplyTo(seccionFromDb, ModelState);
+
+            await uow.SaveAsync();
+            return StatusCode(200);
+
         }
 
         /*

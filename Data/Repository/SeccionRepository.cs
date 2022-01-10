@@ -23,6 +23,11 @@ namespace GEN_InventarioRestApi.Data.Repository
             context.Secciones.Remove(seccion);
         }
 
+        public async Task<Seccion> FindSeccion(int id)
+        {
+            return await context.Secciones.FindAsync(id);
+        }
+
         public async Task<IEnumerable<Seccion>> GetSeccionesAsync()
         {
             return await context.Secciones.ToListAsync();

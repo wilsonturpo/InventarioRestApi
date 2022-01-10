@@ -10,6 +10,9 @@ namespace GEN_InventarioRestApi.Helpers
         {
             CreateMap<Seccion, SeccionDto>().ReverseMap();
             //CreateMap<SeccionDto, Seccion>();
+
+            CreateMap<Medida, MedidaDto>().ReverseMap();
+            CreateMap<Producto, ProductoListDto>().ReverseMap();
         }
     }
 }

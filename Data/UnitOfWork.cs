@@ -14,6 +14,10 @@ namespace GEN_InventarioRestApi.Data
 
         public ISeccionRepository SeccionRepository => new SeccionRepository(context);
 
+        public IMedidaRepository MedidaRepository => new MedidaRepository(context);
+
+        public IProductoRepository ProductoRepository => new ProductoRepository(context);
+
         public async Task<bool> SaveAsync()
         {
             return await context.SaveChangesAsync() > 0;

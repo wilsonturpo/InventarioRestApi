@@ -7,5 +7,6 @@ namespace GEN_InventarioRestApi.Interfaces
         Task<IEnumerable<Seccion>> GetSeccionesAsync();
         void AddSeccion(Seccion seccion);
         void DeleteSeccion(int seccionId);
+        Task<Seccion> FindSeccion(int id);
     }
 }
